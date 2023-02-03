@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -26,6 +28,11 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
+
+        if(!Auth::check()){
+            return response('Not Allowed', '401');
+        }
+
         $request->validate([
             'body' => 'required|min:5|max:2000|string',
             'post_id' => 'required|exists:posts,id'
@@ -35,10 +42,17 @@ class CommentController extends Controller
         $comment->body = $request->body;
         
         $post = Post::find($request->post_id);
-        $comment->post()->associate($post)->save();
 
-        $comment->save();
+        
+        $comment->post()->associate($post);
 
+        $user = User::find(Auth::user()->id);
+    
+        
+
+        $comment->user()->associate($user)->save();
+
+        
         return redirect('posts/' . $request->post_id)->with('status', 'Comment successfully posted');
     }
 

@@ -2,9 +2,17 @@
   <div class="container d-flex flex-wrap">
     <ul class="nav me-auto">
       <li class="nav-item"><a href="/" class="nav-link link-dark px-2 active" aria-current="page">Home</a></li>
-      <li class="nav-item"><a href="/posts" class="nav-link link-dark px-2">Posts</a></li>
+      
       <li class="nav-item"><a href="/about" class="nav-link link-dark px-2">About</a></li>
-      <li class="nav-item"><a href="/createpost" class="nav-link link-dark px-2">Create Post</a></li>
+      
+        @if (Auth::check()) 
+          <li class="nav-item"><a href="/posts" class="nav-link link-dark px-2">Posts</a></li>
+          <li class="nav-item"><a href="/createpost" class="nav-link link-dark px-2">Create Post</a></li>
+          <li class="nav-item"><a href="/profile" class="nav-link link-dark px-2">Profile</a></li>
+          <li class="nav-item"><a href="/postdashboard" class="nav-link link-dark px-2">Post Dashboard</a></li>
+          <li class="nav-item"><a href="/userdashboard" class="nav-link link-dark px-2">User Dashboard</a></li>
+        @endif
+      
     </ul>
     <ul class="nav">
       <li class="nav-item"><a href="/signin" class="nav-link link-dark px-2">Sign in</a></li>

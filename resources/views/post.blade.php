@@ -7,6 +7,7 @@
     <div class="col-sm-8 py-5 mx-auto">
       <h1 class="display-5 fw-normal">{{ $post->title }}</h1>
       <p class="fs-5">{{ $post->body }}</p>
+      <p>Author: {{ $author }}</p>
   </div>
   </div>
 </div>
